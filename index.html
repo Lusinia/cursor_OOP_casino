@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OOP-Casino</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="./favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+
+<body>
+
+<button class="begin-casino">Давай сыграем в игру</button>
+
+<div class="wrapper">
+    <div class="casino">
+        <div class="hidden">
+            <h2>Casino</h2>
+            <p class="total-info">
+                <span>Общая сумма денег в бизнесе:</span><span class="total-money"></span>
+                <span>Доступные деньги на руках:</span><span class="real-money">0</span>
+                <span>Автоматов в казино: </span><span class="total-machines"></span>
+            </p>
+            <button class="add_machine">Добавить автомат</button>
+            <button class="remove_machine">Убрать автомат</button>
+            <button class="take_money">Вывести деньги с казино</button>
+            <h3>Автоматов в казино</h3>
+            <ol class="casino-list"></ol>
+        </div>
+    </div>
+    <div class="machine">
+        <div class="hidden">
+            <h2>Slotmachine № <span class="number"></span></h2>
+            <p class="money"></p>
+            <div class="table-money">
+                <span class="table-money_disc">Внесенная сумма - </span>
+                <span class="table-money_display"></span>
+            </div>
+            <button class="put_money">Закинуть деньги</button>
+            <button class="take_profit">Вывести деньги из машины</button>
+            <input type="text" class="prize" placeholder="Введите сумму">
+            <button class="play">ИГРА</button>
+            <div class="machine-item machine-item_combination"></div>
+            <div class="machine-item machine-item_prize"></div>
+            <button class="take_prize">забрать выигрыш</button>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="./js/main.js"></script>
+</body>
+
+</html>
