@@ -9,7 +9,7 @@ function Casino(SlotMachines, startCasinoMoney) {
     var machinesArr = [];
     this.machineList = machinesArr;
 
-    var addSlotMashines = function () {
+    var addSlotMashines = function() {
 
         var moneyForOneMashine = Math.floor(me.startCasinoMoney / me.slotMachines); // Денег на одну машину в среднем
 
@@ -29,15 +29,15 @@ function Casino(SlotMachines, startCasinoMoney) {
     };
     addSlotMashines();
 
-    this.totalSum = function () {
+    this.totalSum = function() {
         return +me.startCasinoMoney;
     };
 
-    this.totalMachines = function () {
+    this.totalMachines = function() {
         return +me.slotMachines;
     };
 
-    this.addMachine = function () {
+    this.addMachine = function() {
         var max = 0; // максимум денег в списке машин
         var number = 0; // номер машины в списке
 
@@ -48,7 +48,7 @@ function Casino(SlotMachines, startCasinoMoney) {
             }
         }
 
-        var moneyToShare = Math.floor(machinesArr[number].startMachineMoney / 2) ; // делим максимальную сумму в машине на два
+        var moneyToShare = Math.floor(machinesArr[number].startMachineMoney / 2); // делим максимальную сумму в машине на два
 
         machinesArr[number].startMachineMoney = moneyToShare;
 
@@ -57,14 +57,14 @@ function Casino(SlotMachines, startCasinoMoney) {
         me.slotMachines++;
     };
 
-    this.removeMachine = function (number) {
+    this.removeMachine = function(number) {
 
         if (number <= machinesArr.length) {
             var currentNumber = number - 1;
             var currentMashine = machinesArr[currentNumber];
             var moneyInMashine = currentMashine.startMachineMoney;
             machinesArr.splice(currentNumber, 1);
-            var avarageSum = Math.floor(moneyInMashine / machinesArr.length) ;
+            var avarageSum = Math.floor(moneyInMashine / machinesArr.length);
 
             for (var i = 0; i < machinesArr.length; i++) {
                 machinesArr[i].startMachineMoney += +avarageSum;
@@ -74,7 +74,7 @@ function Casino(SlotMachines, startCasinoMoney) {
 
     };
 
-    this.getMoney = function (number) {
+    this.getMoney = function(number) {
         if (!isNaN(number)) {
             me.startCasinoMoney -= number;
             var machMoney = [];
@@ -111,10 +111,10 @@ function SlotMachine(startMachineMoney) {
     this.lucky = false;
     var that = this;
 
-    this.totalSum = function () {
+    this.totalSum = function() {
         return that.startMachineMoney;
     };
-    this.getMoney = function (number) {
+    this.getMoney = function(number) {
 
         if (number <= that.startMachineMoney) {
             that.startMachineMoney -= number;
@@ -124,10 +124,10 @@ function SlotMachine(startMachineMoney) {
         }
 
     };
-    this.setMoney = function (number) {
+    this.setMoney = function(number) {
         that.startMachineMoney += number;
     };
-    this.play = function (number) {
+    this.play = function(number) {
 
         var combinationOne;
         var combinationTwo;
@@ -164,12 +164,8 @@ function SlotMachine(startMachineMoney) {
         return {
             'combination': combination,
             'prize': prize
-
         }
-
-
     }
-
 }
 
 // Playing with DOM
@@ -196,12 +192,12 @@ var slotMachineMoney = document.querySelector('.money'),
 
 
 // Casino
-playCasino.addEventListener('click', function () {
+playCasino.addEventListener('click', function() {
     // Обьявляем доступные на руках деньги
     var realMoney = 0;
 
     var listItems = document.querySelectorAll('.casino-item');
-    // if list of machines exists - we'll remove it
+    // если список существует - удаляем его
     if (listItems) {
         for (var i = 0; i < listItems.length; i++) {
             listItems[i].remove();
@@ -238,7 +234,7 @@ playCasino.addEventListener('click', function () {
     hidden[1].style.display = 'block';
 
 
-    casinoAddMachine.addEventListener('click', function () {
+    casinoAddMachine.addEventListener('click', function() {
         casino.addMachine();
         casinoMachines.innerText = casino.totalMachines();
         // усли список существует - его удалить
@@ -260,7 +256,7 @@ playCasino.addEventListener('click', function () {
         startPrize = listSMashines[numberOfMachine].startMachineMoney;
     });
 
-    casinoRemoveMachine.addEventListener("click", function () {
+    casinoRemoveMachine.addEventListener("click", function() {
         var numberOfRemoveItem = prompt("Enter number of machine to remove");
         numberOfRemoveItem = Math.floor(numberOfRemoveItem);
         if (numberOfRemoveItem <= listSMashines.length && numberOfRemoveItem >= 1 && numberOfRemoveItem !== numberOfMachine + 1) {
@@ -287,24 +283,26 @@ playCasino.addEventListener('click', function () {
         }
     });
 
-    casinoTakeMoney.addEventListener("click", function () {
+    casinoTakeMoney.addEventListener("click", function() {
         var askNumber = prompt("How much money do you want to take?");
         if (askNumber <= casino.totalSum()) {
             casino.getMoney(askNumber);
             realMoney = askNumber;
             casino.startCasinoMoney -= askNumber;
 
-            var listItems = document.querySelectorAll('.casino-item');
+            listItems = document.querySelectorAll('.casino-item');
             if (listItems)
                 for (var i = 0; i < listItems.length; i++) {
                     listItems[i].remove();
-
                     var machineItem = document.createElement('li');
                     machineItem.innerText = "$" + listSMashines[i].startMachineMoney;
                     machineItem.classList.add('casino-item');
                     casinoInfoMachines.appendChild(machineItem);
                 }
             casinoMoneyDisplay2.innerText = realMoney;
+            // Обновили надпись о максимальном призе в слотмашине
+            slotMachineMoney.innerText = "Максимальный приз " + listSMashines[numberOfMachine].startMachineMoney + "$";
+            startPrize = listSMashines[numberOfMachine].startMachineMoney;
 
         }
     });
@@ -318,15 +316,13 @@ playCasino.addEventListener('click', function () {
     slotMachineSpendMoney.innerText = playerMoney;
 
 
-    slotMachinePut_money.addEventListener("click", function () {
+    slotMachinePut_money.addEventListener("click", function() {
         var moneyForGame = prompt("Минимальная сумма взноса равна $ 10, сколько ты готов потратить?", "50");
         moneyForGame = parseInt(moneyForGame);
         if (moneyForGame < 10 || isNaN(moneyForGame)) {
             alert("Внесите минимум 10$");
 
-        }
-
-        else {
+        } else {
             slot.setMoney(moneyForGame);
             playerMoney += moneyForGame;
             slotMachineSpendMoney.innerText = playerMoney;
@@ -352,7 +348,7 @@ playCasino.addEventListener('click', function () {
 
 
     });
-    slotMachineplay.addEventListener("click", function () {
+    slotMachineplay.addEventListener("click", function() {
         if (playerMoney < 10) {
             alert("Внесите деньги для начала игры");
 
@@ -387,7 +383,7 @@ playCasino.addEventListener('click', function () {
 
     });
 
-    slotMachineTakeMoney.addEventListener("click", function () {
+    slotMachineTakeMoney.addEventListener("click", function() {
         var howMuchMoney = document.querySelector('.prize').value;
         howMuchMoney = parseInt(howMuchMoney);
         if (howMuchMoney <= startPrize) {
@@ -404,7 +400,7 @@ playCasino.addEventListener('click', function () {
         }
 
     });
-    slotMachineTakePrize.addEventListener("click", function () {
+    slotMachineTakePrize.addEventListener("click", function() {
         slotMachinePlayResult.innerText = '0';
     })
 
