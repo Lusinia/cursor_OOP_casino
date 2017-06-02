@@ -285,10 +285,11 @@ playCasino.addEventListener('click', function() {
 
     casinoTakeMoney.addEventListener("click", function() {
         var askNumber = prompt("How much money do you want to take?");
-        if (askNumber <= casino.totalSum()) {
+        if (askNumber <= casino.startCasinoMoney) {
             casino.getMoney(askNumber);
             realMoney = askNumber;
-            casino.startCasinoMoney -= askNumber;
+            casinoMoneyDisplay.innerText = casino.startCasinoMoney;
+
 
             listItems = document.querySelectorAll('.casino-item');
             if (listItems)
