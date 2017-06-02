@@ -1,9 +1,9 @@
 /**
  * Created by alenka on 01.06.17.
  */
-function Casino(SlotMachines, startCasinoMoney) {
+function Casino(slotMachines, startCasinoMoney) {
 
-    this.slotMachines = SlotMachines;
+    this.slotMachines = slotMachines;
     this.startCasinoMoney = startCasinoMoney;
     var me = this;
     var machinesArr = [];
@@ -184,7 +184,7 @@ var slotMachineMoney = document.querySelector('.money'),
     slotMachineNumber = document.querySelector('.number'),
     slotMachineTakeMoney = document.querySelector('.take_profit'),
     slotMachineTakePrize = document.querySelector('.take_prize'),
-    slotMachineSpendMoney = document.querySelector('.table-money_display'),
+    slotMachinespendMoney = document.querySelector('.table-money_display'),
     slotMachinePut_money = document.querySelector('.put_money'),
     slotMachineplay = document.querySelector('.play'),
     slotMachinePlayCombination = document.querySelector('.machine-item_combination'),
@@ -314,7 +314,7 @@ playCasino.addEventListener('click', function() {
     startPrize = listSMashines[numberOfMachine].startMachineMoney;
     var playerMoney = 0;
     slotMachineMoney.innerText = "Максимальный приз " + startPrize + "$";
-    slotMachineSpendMoney.innerText = playerMoney;
+    slotMachinespendMoney.innerText = playerMoney;
 
 
     slotMachinePut_money.addEventListener("click", function() {
@@ -326,7 +326,7 @@ playCasino.addEventListener('click', function() {
         } else {
             slot.setMoney(moneyForGame);
             playerMoney += moneyForGame;
-            slotMachineSpendMoney.innerText = playerMoney;
+            slotMachinespendMoney.innerText = playerMoney;
             casino.startCasinoMoney += Number(moneyForGame);
             casinoMoneyDisplay.innerText = casino.startCasinoMoney;
             startPrize += moneyForGame;
@@ -377,7 +377,7 @@ playCasino.addEventListener('click', function() {
 
             //Обнуляем внесенные деньги
             playerMoney = 0;
-            slotMachineSpendMoney.innerText = playerMoney;
+            slotMachinespendMoney.innerText = playerMoney;
             slotMachinePlayResult.innerText = gamePrize;
 
         }
